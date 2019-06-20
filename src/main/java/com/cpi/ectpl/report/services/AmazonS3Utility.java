@@ -37,4 +37,8 @@ public class AmazonS3Utility {
 
 		return s3client.doesObjectExist(BUCKET_NAME, key);
 	}
+	
+	public boolean deleteObjectsFromS3() {
+		return true;
+	}
 }

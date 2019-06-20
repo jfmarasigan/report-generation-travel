@@ -21,7 +21,6 @@ public class ReportGenerator {
 	private String reportBinariesDirectory;
 
 	private static final String SEPARATOR = "/";
-//	private static final String BUCKET_NAME = System.getenv("BUCKET");
 	private static final String JASPER_REPORT_DIR = System.getenv("JASPER_REPORT_DIR");
 	private static final String GENERATED_REPORTS_DIR = System.getenv("GENERATED_REPORT_DIR");
 
@@ -43,19 +42,6 @@ public class ReportGenerator {
 		return s3util.putObjectToS3Bucket(jasperByte, generateReportDirectory(policyId));
 	}
 
-//	private boolean putReportToS3Bucket(byte[] report, String uniqueDirectory) {
-//		ObjectMetadata metadata = new ObjectMetadata();
-//		metadata.setContentLength(report.length);
-//		metadata.setContentType("application/pdf");
-//
-//		String key = generateReportDirectory(uniqueDirectory);
-//		InputStream generatedReportStream = new ByteArrayInputStream(report);
-//		PutObjectRequest putObjectRequest = new PutObjectRequest(BUCKET_NAME, key, generatedReportStream, metadata);
-//		s3client.putObject(putObjectRequest);
-//
-//		return s3client.doesObjectExist(BUCKET_NAME, key);
-//	}
-
 	private String generateReportDirectory(String uniqueDirectory) {
 		return new StringBuilder(GENERATED_REPORTS_DIR)
 				.append(SEPARATOR)
@@ -64,12 +50,6 @@ public class ReportGenerator {
 				.append(reportName)
 				.append(".pdf").toString();
 	}
-
-//	private InputStream getReportBinaryFromS3(String key) {
-//		GetObjectRequest request = new GetObjectRequest(BUCKET_NAME, key);
-//		S3Object reportBinary = s3client.getObject(request);
-//		return reportBinary.getObjectContent();
-//	}
 
 	@SuppressWarnings("unused")
 	private InputStream getReportBinaryFromURL() throws MalformedURLException, IOException {

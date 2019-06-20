@@ -39,8 +39,8 @@ public class FunctionParameters {
 
 	public Map<String, Object> toMap() {
 		Map<String, Object> map = new HashMap<>();
-		map.put("policyId", this.policyId);
-		map.put("tranId", this.tranId);
+		map.put("P_POLICY_ID", this.policyId);
+		map.put("P_TRAN_ID", this.tranId);
 		
 		return map;
 	}
