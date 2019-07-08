@@ -51,9 +51,17 @@ public class LambdaFunctionHandler implements RequestHandler<FunctionParameters,
 
 		String recipient = input.getRecipient();
 		EmailSender sender = new EmailSender(recipient, policyId.toString());
-		ObjectNode emailResult = sender.send();
+		ObjectNode response = processEmailResponse(sender, updater);
 
-		return generateResponse(emailResult);
+		return generateResponse(response);
+	}
+	
+	private ObjectNode processEmailResponse(EmailSender sender, DatabaseOperations ops) {		
+		ObjectNode emailResult = sender.send();
+		String message = emailResult.get("message").asText();
+		ops.updateEmailSendingStatus(message);
+		
+		return emailResult;
 	}
 	
 	private String generateResponse(ObjectNode emailResult) {
