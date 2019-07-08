@@ -10,7 +10,7 @@ import com.cpi.ectpl.report.db.DatabaseConnection;
 import com.cpi.ectpl.report.exception.ReportGenerationException;
 import com.cpi.ectpl.report.services.EmailSender;
 import com.cpi.ectpl.report.services.ReportGenerator;
-import com.cpi.ectpl.report.services.StatusUpdater;
+import com.cpi.ectpl.report.services.DatabaseOperations;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
@@ -25,7 +25,7 @@ public class LambdaFunctionHandler implements RequestHandler<FunctionParameters,
 		System.out.println("Generating reports using input : " + input);
 		Integer policyId = input.getPolicyId();
 		Integer tranId = input.getTranId();
-		StatusUpdater updater = new StatusUpdater(policyId, tranId);
+		DatabaseOperations updater = new DatabaseOperations(policyId, tranId);
 		
 		try (Connection connection = DatabaseConnection.createMySQLConnection();) {
 			boolean isGenerated = true;
