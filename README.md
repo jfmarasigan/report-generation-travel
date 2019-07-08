@@ -1,2 +1,2 @@
-# report-generation-ectpl
-repo for the lambda function
+# report-generation-travel
+same as report-generation-ectpl, but for travel :)
