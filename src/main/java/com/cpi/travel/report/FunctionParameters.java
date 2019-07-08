@@ -1,4 +1,4 @@
-package com.cpi.ectpl.report;
+package com.cpi.travel.report;
 
 import java.util.HashMap;
 import java.util.Map;

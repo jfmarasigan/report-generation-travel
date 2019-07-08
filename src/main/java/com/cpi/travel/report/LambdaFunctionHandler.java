@@ -1,4 +1,4 @@
-package com.cpi.ectpl.report;
+package com.cpi.travel.report;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -6,11 +6,11 @@ import java.sql.SQLException;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import com.cpi.ectpl.report.db.DatabaseConnection;
-import com.cpi.ectpl.report.exception.ReportGenerationException;
-import com.cpi.ectpl.report.services.EmailSender;
-import com.cpi.ectpl.report.services.ReportGenerator;
-import com.cpi.ectpl.report.services.DatabaseOperations;
+import com.cpi.travel.report.db.DatabaseConnection;
+import com.cpi.travel.report.exception.ReportGenerationException;
+import com.cpi.travel.report.services.DatabaseOperations;
+import com.cpi.travel.report.services.EmailSender;
+import com.cpi.travel.report.services.ReportGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;

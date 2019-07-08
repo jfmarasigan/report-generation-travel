@@ -1,4 +1,4 @@
-package com.cpi.ectpl.report.exception;
+package com.cpi.travel.report.exception;
 
 public class ReportGenerationException extends RuntimeException {
 

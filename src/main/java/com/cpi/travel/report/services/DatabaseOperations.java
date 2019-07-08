@@ -1,4 +1,4 @@
-package com.cpi.ectpl.report.services;
+package com.cpi.travel.report.services;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.StringJoiner;
 
-import com.cpi.ectpl.report.db.DatabaseConnection;
-import com.cpi.ectpl.report.exception.ReportGenerationException;
+import com.cpi.travel.report.db.DatabaseConnection;
+import com.cpi.travel.report.exception.ReportGenerationException;
 
 public final class DatabaseOperations {
 

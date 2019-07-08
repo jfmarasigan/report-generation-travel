@@ -1,4 +1,4 @@
-package com.cpi.ectpl.report.services;
+package com.cpi.travel.report.services;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
@@ -7,7 +7,7 @@ import com.amazonaws.services.lambda.AWSLambda;
 import com.amazonaws.services.lambda.AWSLambdaClientBuilder;
 import com.amazonaws.services.lambda.model.InvokeRequest;
 import com.amazonaws.services.lambda.model.InvokeResult;
-import com.cpi.ectpl.report.exception.ReportGenerationException;
+import com.cpi.travel.report.exception.ReportGenerationException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;

@@ -1,4 +1,4 @@
-package com.cpi.ectpl.report.services;
+package com.cpi.travel.report.services;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -6,7 +6,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Connection;
 
-import com.cpi.ectpl.report.FunctionParameters;
+import com.cpi.travel.report.FunctionParameters;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;

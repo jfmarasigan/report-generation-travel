@@ -1,11 +1,11 @@
-package com.cpi.ectpl.report.db;
+package com.cpi.travel.report.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import com.cpi.ectpl.report.exception.ReportGenerationException;
-import com.cpi.ectpl.report.utilities.KMSDecryptor;
+import com.cpi.travel.report.exception.ReportGenerationException;
+import com.cpi.travel.report.utilities.KMSDecryptor;
 import com.mysql.cj.jdbc.Driver;
 
 public class DatabaseConnection {
