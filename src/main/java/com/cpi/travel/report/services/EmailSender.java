@@ -40,15 +40,14 @@ public final class EmailSender {
 		InvokeResult result = client.invoke(request);
 		ByteBuffer buffer = result.getPayload();
 		String functionError = result.getFunctionError();
-		String resultPayload = null;
+		String resultPayload = StandardCharsets.UTF_8.decode(buffer).toString();
 
 		if (buffer != null && functionError == null) {
-			resultPayload = StandardCharsets.UTF_8.decode(buffer).toString();
 			System.out.println("Email sending done. Payload: " + resultPayload);
 			return constructResponse("Email sending done.", resultPayload);
 		} else {
-			System.out.println("Error after invoking email sender : " + functionError);
-			return constructResponse("Error after invoking email sender", functionError);
+			System.out.println("Error after invoking email sender : " + resultPayload);
+			return constructResponse("Error after invoking email sender", resultPayload);
 		}
 	}
 
