@@ -1,4 +1,4 @@
-package com.cpi.travel.report;
+package com.cpi.travel.report.entities;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +23,10 @@ public class FunctionParameters {
 
 	public Integer getPolicyId() {
 		return policyId;
+	}
+	
+	public String getStrPolicyId() {
+		return policyId == null ? "" : policyId.toString();
 	}
 
 	public void setPolicyId(Integer policyId) {

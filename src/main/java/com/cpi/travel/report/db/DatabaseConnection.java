@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import com.cpi.travel.report.exception.ReportGenerationException;
+import com.cpi.travel.report.utilities.Env;
 import com.cpi.travel.report.utilities.KMSDecryptor;
 import com.mysql.cj.jdbc.Driver;
 
@@ -51,17 +52,17 @@ public class DatabaseConnection {
 	 * */
 	public static Connection createMySQLConnection() {
 		try {
-			String url = System.getenv("HOST");
-			String portNumber = System.getenv("PORT");
-			String databaseName = System.getenv("DATABASE_NAME");
-			String username = KMSDecryptor.decrypt(System.getenv("DATABASE_USER"));
-			String password = KMSDecryptor.decrypt(System.getenv("DATABASE_PASSWORD"));
+			String url = Env.HOST.value();
+			String portNumber = Env.PORT.value();
+			String databaseName = Env.DATABASE_NAME.value();
+			String username = KMSDecryptor.decrypt(Env.DATABASE_USER.value());
+			String password = KMSDecryptor.decrypt(Env.DATABASE_PASSWORD.value());
 			
 			DriverManager.registerDriver(new Driver());
 			String jdbcURL = "jdbc:mysql://" + url + ":" + portNumber + "/" + databaseName;
 			return DriverManager.getConnection(jdbcURL, username, password);
 		} catch (SQLException e) {
-			throw new ReportGenerationException("An error occurred while create database connection", e);
+			throw new ReportGenerationException("An error occurred while creating database connection", e);
 		}
 	}
 }

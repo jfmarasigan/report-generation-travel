@@ -8,6 +8,7 @@ import com.amazonaws.services.lambda.AWSLambdaClientBuilder;
 import com.amazonaws.services.lambda.model.InvokeRequest;
 import com.amazonaws.services.lambda.model.InvokeResult;
 import com.cpi.travel.report.exception.ReportGenerationException;
+import com.cpi.travel.report.utilities.Env;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
@@ -22,12 +23,17 @@ public final class EmailSender {
 		this.recipient = recipient;
 		this.uniqueDirectory = uniqueDirectory;
 	}
+	
+	public EmailSender(String uniqueDirectory) {
+		this.recipient = null;
+		this.uniqueDirectory = uniqueDirectory;
+	}
 
 	public ObjectNode send() {
 		AWSLambdaClientBuilder builder = AWSLambdaClientBuilder.standard();
 		AWSLambda client = builder.build();
 
-		InvokeRequest request = new InvokeRequest().withFunctionName(System.getenv("EMAIL_SENDER_FUNCTION"));
+		InvokeRequest request = new InvokeRequest().withFunctionName(Env.EMAIL_SENDER.value());
 		String emailPayload = constructEmailPayload();
 		request.withPayload(emailPayload);
 
