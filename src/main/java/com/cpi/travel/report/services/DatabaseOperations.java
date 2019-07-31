@@ -21,7 +21,7 @@ public final class DatabaseOperations {
 	 * Updates report status upon generation of reports
 	 * */
 	public void updateGenerateReportStatus(String message) {
-		String query = "UPDATE EPIT_CTPL_TRANS SET GEN_REPORT_STAT = ?, LAST_UPDATE = sysdate() WHERE policy_id = ?";
+		String query = "UPDATE EPIT_TRAVEL_TRANS SET GEN_REPORT_STAT = ?, LAST_UPDATE = sysdate() WHERE policy_id = ?";
 
 		try (Connection connection = DatabaseConnection.createMySQLConnection();) {
 			try (PreparedStatement stmt = connection.prepareStatement(query);) {
@@ -42,7 +42,7 @@ public final class DatabaseOperations {
 	 * Updates email status upon sending reports through email
 	 * */
 	public void updateEmailSendingStatus(String message) {
-		String query = "UPDATE EPIT_CTPL_TRANS SET EMAIL_REPORT_STAT = ?, LAST_UPDATE = sysdate() WHERE policy_id = ?";
+		String query = "UPDATE EPIT_TRAVEL_TRANS SET EMAIL_REPORT_STAT = ?, LAST_UPDATE = sysdate() WHERE policy_id = ?";
 
 		try (Connection connection = DatabaseConnection.createMySQLConnection();) {
 			try (PreparedStatement stmt = connection.prepareStatement(query);) {
