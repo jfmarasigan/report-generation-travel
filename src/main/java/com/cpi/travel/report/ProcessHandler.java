@@ -35,7 +35,7 @@ public final class ProcessHandler {
 	}
 
 	public String process() {
-		DatabaseOperations updater = new DatabaseOperations(fnParams.getPolicyId(), fnParams.getTranId());
+		DatabaseOperations updater = new DatabaseOperations(fnParams.getPolicyId());
 		String reportDir = fnParams.getStrPolicyId();
 
 		List<ReportStrings> reportStrings = reportStrings(reportDir);
@@ -91,6 +91,7 @@ public final class ProcessHandler {
 		String[] keys = reportStrings.stream()
 				.map(reportString -> reportString.getGeneratedReportDir())
 				.toArray(String[]::new);
+		System.out.println("Deleting: " + keys);
 		s3util.deleteObjectsFromS3(keys);
 	}
 
