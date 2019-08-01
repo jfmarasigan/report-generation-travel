@@ -91,7 +91,7 @@ public final class ProcessHandler {
 		String[] keys = reportStrings.stream()
 				.map(reportString -> reportString.getGeneratedReportDir())
 				.toArray(String[]::new);
-		System.out.println("Deleting: " + keys);
+		System.out.println("Deleting: " + Arrays.toString(keys));
 		s3util.deleteObjectsFromS3(keys);
 	}
 
