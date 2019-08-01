@@ -6,6 +6,7 @@ import java.util.Map;
 public class FunctionParameters {
 
 	private String recipient;
+	private Boolean isPing;
 	private Integer policyId;
 	private Integer tranId;
 
@@ -24,7 +25,7 @@ public class FunctionParameters {
 	public Integer getPolicyId() {
 		return policyId;
 	}
-	
+
 	public String getStrPolicyId() {
 		return policyId == null ? "" : policyId.toString();
 	}
@@ -41,11 +42,19 @@ public class FunctionParameters {
 		this.tranId = tranId;
 	}
 
+	public Boolean getIsPing() {
+		return isPing == null ? false : isPing;
+	}
+
+	public void setIsPing(Boolean isPing) {
+		this.isPing = isPing;
+	}
+
 	public Map<String, Object> toMap() {
 		Map<String, Object> map = new HashMap<>();
 		map.put("P_POLICY_ID", this.policyId);
 		map.put("P_TRAN_ID", this.tranId);
-		
+
 		return map;
 	}
 }

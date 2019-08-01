@@ -8,6 +8,10 @@ public class LambdaFunctionHandler implements RequestHandler<FunctionParameters,
 
 	@Override
 	public String handleRequest(FunctionParameters input, Context context) {
+		if (input.getIsPing() || input.getIsPing() != null) {
+			System.out.println("Ping event");
+			return null;
+		}
 		System.out.println("Generating reports using input : " + input);
 		ProcessHandler handler = new ProcessHandler(input);
 		return handler.process();
