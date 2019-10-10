@@ -12,7 +12,9 @@ public enum Env {
 	DATABASE_USER(System.getenv("DATABASE_USER")),
 	DATABASE_PASSWORD(System.getenv("DATABASE_PASSWORD")),
 	REPORTS(System.getenv("REPORTS")),
-	EMAIL_SENDER(System.getenv("EMAIL_SENDER_FUNCTION"))
+	EMAIL_SENDER(System.getenv("EMAIL_SENDER_FUNCTION")),
+	COMPANY_NAME(System.getenv("COMPANY_NAME")),
+	APPLICATION(System.getenv("APPLICATION"))
 	;
 	
 	private String value;

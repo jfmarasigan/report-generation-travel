@@ -35,19 +35,20 @@ public final class ProcessHandler {
 	}
 
 	public String process() {
-		DatabaseOperations updater = new DatabaseOperations(fnParams.getPolicyId());
+		DatabaseOperations dbOps = new DatabaseOperations(fnParams.getPolicyId());
 		String reportDir = fnParams.getStrPolicyId();
 
 		List<ReportStrings> reportStrings = reportStrings(reportDir);
-		String reportGenerationStatus = generateReports(reportStrings, fnParams);
-		updater.updateGenerateReportStatus(reportGenerationStatus);
+		String pwd = dbOps.getDocumentPassword();
+		String reportGenerationStatus = generateReports(reportStrings, fnParams, pwd);
+		dbOps.updateGenerateReportStatus(reportGenerationStatus);
 
 		if (!"SUCCESS".equals(reportGenerationStatus)) {
 			throw new ReportGenerationException(reportGenerationStatus);
 		}
 
-		EmailSender sender = new EmailSender(reportDir);
-		ObjectNode emailResult = processEmailResponse(sender, updater);
+		EmailSender sender = new EmailSender(reportDir, pwd);
+		ObjectNode emailResult = processEmailResponse(sender, dbOps);
 
 		deleteReports(reportStrings);
 
@@ -73,12 +74,12 @@ public final class ProcessHandler {
 				}).collect(Collectors.toList());
 	}
 
-	private String generateReports(List<ReportStrings> reportStrings, FunctionParameters reportParams) {
+	private String generateReports(List<ReportStrings> reportStrings, FunctionParameters reportParams, String pwd) {
 		try (Connection connection = DatabaseConnection.createMySQLConnection();) {
 			for (ReportStrings reportString : reportStrings) {
 				InputStream report = s3util.getObjectFromS3(reportString.getReportBinaryDir());
 				ReportGenerator generator = new ReportGenerator(report);
-				byte[] byteReport = generator.generatePDFReportByteArray(connection, reportParams);
+				byte[] byteReport = generator.generatePasswordProtectedPDF(connection, reportParams, pwd);
 				s3util.putObjectToS3Bucket(byteReport, reportString.getGeneratedReportDir());
 			}
 			return "SUCCESS";

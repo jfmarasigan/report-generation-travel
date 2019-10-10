@@ -18,15 +18,18 @@ public final class EmailSender {
 
 	private String recipient;
 	private String uniqueDirectory;
+	private String docPwd;
 
-	public EmailSender(String recipient, String uniqueDirectory) {
+	public EmailSender(String recipient, String uniqueDirectory, String docPwd) {
 		this.recipient = recipient;
 		this.uniqueDirectory = uniqueDirectory;
+		this.docPwd = docPwd;
 	}
 	
-	public EmailSender(String uniqueDirectory) {
+	public EmailSender(String uniqueDirectory, String docPwd) {
 		this.recipient = null;
 		this.uniqueDirectory = uniqueDirectory;
+		this.docPwd = docPwd;
 	}
 
 	public ObjectNode send() {
@@ -60,6 +63,7 @@ public final class EmailSender {
 			ObjectNode jsonNode = JsonNodeFactory.instance.objectNode();
 			jsonNode.put("recipient", recipient);
 			jsonNode.put("prefix", uniqueDirectory);
+			jsonNode.put("docPwd", docPwd);
 
 			return mapper.writeValueAsString(jsonNode);
 		} catch (JsonProcessingException e) {
