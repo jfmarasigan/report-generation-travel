@@ -39,22 +39,25 @@ public class ReportGenerator {
 			throws MalformedURLException, JRException, IOException {
 		JasperPrint jasperPrint = JasperFillManager.fillReport(this.report, reportParams.toMap(), connection);
 		
-		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		ByteArrayOutputStream reportOutputStream = new ByteArrayOutputStream();
 		
 		JRPdfExporter exporter = new JRPdfExporter();
 		exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-		exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(os));
+		exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(reportOutputStream));
 		
 		SimplePdfExporterConfiguration config = new SimplePdfExporterConfiguration();
-		config.setEncrypted(true);
-		config.set128BitKey(true);
-		config.setUserPassword(pwd);
-		//config.setOwnerPassword(pwd);
-		config.setPermissions(PdfWriter.ALLOW_PRINTING);
+		
+		if (pwd != null && !"".equals(pwd)) {
+			config.setEncrypted(true);
+			config.set128BitKey(true);
+			config.setUserPassword(pwd);
+			//config.setOwnerPassword(pwd);
+			config.setPermissions(PdfWriter.ALLOW_PRINTING);
+		}
 		exporter.setConfiguration(config);		
 		exporter.exportReport();
 		
-		return os.toByteArray();
+		return reportOutputStream.toByteArray();
 	}
 
 	@SuppressWarnings("unused")
