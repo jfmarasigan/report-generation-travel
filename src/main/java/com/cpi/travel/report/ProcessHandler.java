@@ -75,7 +75,7 @@ public final class ProcessHandler {
 	}
 
 	private String generateReports(List<ReportStrings> reportStrings, FunctionParameters reportParams, String pwd) {
-		try (Connection connection = DatabaseConnection.createMySQLConnection();) {
+		try (Connection connection = DatabaseConnection.getMySQLConnection();) {
 			for (ReportStrings reportString : reportStrings) {
 				InputStream report = s3util.getObjectFromS3(reportString.getReportBinaryDir());
 				ReportGenerator generator = new ReportGenerator(report);
